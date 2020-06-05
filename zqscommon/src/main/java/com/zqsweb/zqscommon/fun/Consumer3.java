@@ -1,0 +1,13 @@
+package com.zqsweb.zqscommon.fun;
+
+/*
+ *   @author zhangqisheng
+ *   @date 2020-04-27 15:14
+ *   @description
+ */
+@FunctionalInterface
+public interface Consumer3<T1,T2,T3> {
+
+    void accept(T1 t1, T2 t2, T3 t3);
+
+}

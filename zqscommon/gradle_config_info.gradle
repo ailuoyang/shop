@@ -1,0 +1,111 @@
+// 声明是Android程序，
+//com.android.application 表示这是一个应用程序模块
+//com.android.library 标识这是一个库模块
+//而这区别：前者可以直接运行，后着是依附别的应用程序运行
+apply plugin: 'com.android.application'
+//gradle一些android开发属性说明,不使用到项目中,仅仅参考
+android {
+ signingConfigs {// 自动化打包配置
+  release {// 线上环境
+   keyAlias 'test'
+   keyPassword '123456'
+   storeFile file('test.jks')
+   storePassword '123456'
+  }
+  debug {// 开发环境
+   keyAlias 'test'
+   keyPassword '123456'
+   storeFile file('test.jks')
+   storePassword '123456'
+  }
+ }
+ compileSdkVersion 27//设置编译时用的Android版本
+ defaultConfig {
+  applicationId "com.billy.myapplication"//项目的包名
+  minSdkVersion 16//项目最低兼容的版本
+  targetSdkVersion 27//项目的目标版本
+  versionCode 1//版本号
+  versionName "1.0"//版本名称
+  flavorDimensions "versionCode"
+  testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"//表明要使用AndroidJUnitRunner进行单元测试
+ }
+ buildTypes {// 生产/测试环境配置
+  release {// 生产环境
+   buildConfigField("boolean", "LOG_DEBUG", "false")//配置Log日志
+   buildConfigField("String", "URL_PERFIX", "\"https://release.cn/\"")// 配置URL前缀
+   minifyEnabled false//是否对代码进行混淆
+   proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'//指定混淆的规则文件
+   signingConfig signingConfigs.release//设置签名信息
+   pseudoLocalesEnabled false//是否在APK中生成伪语言环境，帮助国际化的东西，一般使用的不多
+   zipAlignEnabled true//是否对APK包执行ZIP对齐优化，减小zip体积，增加运行效率
+   applicationIdSuffix 'test'//在applicationId 中添加了一个后缀，一般使用的不多
+   versionNameSuffix 'test'//在applicationId 中添加了一个后缀，一般使用的不多
+  }
+  debug {// 测试环境
+   buildConfigField("boolean", "LOG_DEBUG", "true")//配置Log日志
+   buildConfigField("String", "URL_PERFIX", "\"https://test.com/\"")// 配置URL前缀
+   minifyEnabled false//是否对代码进行混淆
+   proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'//指定混淆的规则文件
+   signingConfig signingConfigs.debug//设置签名信息
+   debuggable false//是否支持断点调试
+   jniDebuggable false//是否可以调试NDK代码
+   renderscriptDebuggable false//是否开启渲染脚本就是一些c写的渲染方法
+   zipAlignEnabled true//是否对APK包执行ZIP对齐优化，减小zip体积，增加运行效率
+   pseudoLocalesEnabled false//是否在APK中生成伪语言环境，帮助国际化的东西，一般使用的不多
+   applicationIdSuffix 'test'//在applicationId 中添加了一个后缀，一般使用的不多
+   versionNameSuffix 'test'//在applicationId 中添加了一个后缀，一般使用的不多
+  }
+ }
+
+ sourceSets {//目录指向配置
+  main {
+   jniLibs.srcDirs = ['libs']//指定lib库目录
+  }
+ }
+
+ packagingOptions{//打包时的相关配置
+  //pickFirsts做用是 当有重复文件时 打包会报错 这样配置会使用第一个匹配的文件打包进入apk
+  // 表示当apk中有重复的META-INF目录下有重复的LICENSE文件时 只用第一个 这样打包就不会报错
+  pickFirsts = ['META-INF/LICENSE']
+
+  //merges何必 当出现重复文件时 合并重复的文件 然后打包入apk
+  //这个是有默认值得 merges = [] 这样会把默默认值去掉 所以我们用下面这种方式 在默认值后添加
+  merge 'META-INF/LICENSE'
+
+  //这个是在同时使用butterknife、dagger2做的一个处理。同理，遇到类似的问题，只要根据gradle的提示，做类似处理即可。
+  exclude 'META-INF/services/javax.annotation.processing.Processor'
+ }
+
+ productFlavors {
+  wandoujia {}
+  xiaomi {}
+  _360 {}
+ }
+
+ productFlavors.all {
+   //批量修改，类似一个循序遍历
+  flavor -> flavor.manifestPlaceholders = [IFLYTEK_CHANNEL: name]
+ }
+
+ //程序在编译的时候会检查lint，有任何错误提示会停止build，我们可以关闭这个开关
+ lintOptions {
+  abortOnError false
+  //即使报错也不会停止打包
+  checkReleaseBuilds false
+  //打包release版本的时候进行检测
+ }
+
+}
+
+dependencies {
+ //项目的依赖关系
+ implementation fileTree(include: ['*.jar'], dir: 'libs')
+ //本地jar包依赖
+ implementation 'com.android.support:appcompat-v7:27.1.1'
+ //远程依赖
+ implementation 'com.android.support.constraint:constraint-layout:1.1.2'
+ testImplementation 'junit:junit:4.12'
+ //声明测试用例库
+ androidTestImplementation 'com.android.support.test:runner:1.0.2'
+ androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+}

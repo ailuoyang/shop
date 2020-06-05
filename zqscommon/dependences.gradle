@@ -1,0 +1,129 @@
+static def allModuleDependencies(DependencyHandler dependencyHandler, String moduleName) {
+
+    dependencyHandler.implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.3.71"
+
+    dependencyHandler.api 'androidx.appcompat:appcompat:1.1.0'
+    dependencyHandler.api 'androidx.constraintlayout:constraintlayout:1.1.3'
+    dependencyHandler.testImplementation 'junit:junit:4.12'
+    dependencyHandler.androidTestImplementation 'androidx.test.ext:junit:1.1.1'
+    dependencyHandler.androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+
+    dependencyHandler.api 'com.google.android.material:material:1.2.0-alpha06'
+
+    //必须
+    dependencyHandler.api 'com.ljx.rxhttp:rxhttp:2.2.0'
+    dependencyHandler.kapt 'com.ljx.rxhttp:rxhttp-compiler:2.2.0' //生成RxHttp类
+    //dependencyHandler.api 'com.ljx.rxlife2:rxlife-rxjava:2.0.0'    //管理RxJava2生命周期，页面销毁，关闭请求
+    dependencyHandler.api 'com.ljx.rxhttp:converter-fastjson:2.2.0'
+
+    //rxhttp开启kotlin携程的一些扩展
+    dependencyHandler.api 'com.ljx.rxlife:rxlife-coroutine:2.0.0'
+
+    //dependencyHandler.api 'com.squareup.okhttp3:okhttp:4.7.2'
+
+    //图片选择
+    //https://github.com/LuckSiege/PictureSelector
+    dependencyHandler.api 'com.github.LuckSiege.PictureSelector:picture_library:v2.5.6'
+
+    //https://github.com/hongyangAndroid/FlowLayout
+    dependencyHandler.api 'com.hyman:flowlayout-lib:1.1.2'
+
+    //https://github.com/Justson/AgentWeb
+    //第三方webview
+    dependencyHandler.api 'com.just.agentweb:agentweb:4.1.2'
+
+    //https://github.com/getActivity/ToastUtils
+    dependencyHandler.api 'com.hjq:toast:8.2'
+
+    dependencyHandler.api 'com.alibaba:fastjson:1.1.71.android'
+    //https://github.com/alibaba/ARouter/blob/master/README_CN.md
+    dependencyHandler.api 'com.alibaba:arouter-api:1.5.0'
+    dependencyHandler.kapt 'com.alibaba:arouter-compiler:1.2.2'
+
+    dependencyHandler.api 'com.github.CymChad:BaseRecyclerViewAdapterHelper:3.0.2'
+    //底部tab
+    //https://www.jianshu.com/p/cada7cc57c61
+    dependencyHandler.api 'com.ashokvarma.android:bottom-navigation-bar:2.2.0'
+
+    //https://github.com/JessYanCoding/AndroidAutoSize/blob/master/README-zh.md
+    //屏幕适配
+    dependencyHandler.api 'me.jessyan:autosize:1.2.1'
+
+    //https://github.com/wuhenzhizao/android-titlebar
+    dependencyHandler.api 'com.wuhenzhizao:titlebar:1.2.0'
+
+    dependencyHandler.api 'androidx.viewpager2:viewpager2:1.0.0'
+
+    // 基础依赖包，必须要依赖
+    //https://github.com/gyf-dev/ImmersionBar
+    dependencyHandler.api 'com.gyf.immersionbar:immersionbar:3.0.0'
+    // fragment快速实现（可选）
+    dependencyHandler.api 'com.gyf.immersionbar:immersionbar-components:3.0.0'
+
+    //https://github.com/hdodenhof/CircleImageView
+    dependencyHandler.api 'de.hdodenhof:circleimageview:3.1.0'
+
+    // 内存泄漏检测
+    dependencyHandler.debugImplementation 'com.squareup.leakcanary:leakcanary-android:1.6.3'
+
+    dependencyHandler.api 'com.github.bumptech.glide:glide:4.11.0'
+    dependencyHandler.kapt 'com.github.bumptech.glide:compiler:4.11.0'
+    dependencyHandler.api 'com.github.bumptech.glide:okhttp3-integration:4.10.0'
+
+    //查看大图
+    //https://github.com/SherlockGougou/BigImageViewPager
+    dependencyHandler.api('com.github.SherlockGougou:BigImageViewPager:androidx-6.0.1'){
+        exclude group: 'com.github.bumptech.glide'
+    }
+
+    //https://github.com/JavaNoober/BackgroundLibrary
+    dependencyHandler.api 'com.noober.background:core:1.6.3'
+
+    //https://github.com/scwang90/SmartRefreshLayout
+    dependencyHandler.api  'com.scwang.smart:refresh-layout-kernel:2.0.0'
+
+    //https://github.com/MZCretin/ExpandableTextView
+    dependencyHandler.api 'com.github.MZCretin:ExpandableTextView:v1.6.1-x'
+
+    //https://github.com/donkingliang/ConsecutiveScroller/issues
+    //嵌套滚动view
+    dependencyHandler.api 'com.github.donkingliang:ConsecutiveScroller:2.5.0'
+
+    dependencyHandler.api "androidx.lifecycle:lifecycle-runtime:2.0.0"
+    dependencyHandler.api "androidx.lifecycle:lifecycle-extensions:2.0.0"
+    dependencyHandler.api "androidx.lifecycle:lifecycle-common-java8:2.0.0"
+    dependencyHandler.kapt  "androidx.lifecycle:lifecycle-compiler:2.0.0"
+
+    //kotlin协程
+    dependencyHandler.api "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.3"
+
+    switch (moduleName) {
+        case "zqscommon":
+            zqscommonDependencies(dependencyHandler)
+            break
+        case "app":
+            appDependencies(dependencyHandler)
+            break
+    }
+}
+
+//:app
+static def appDependencies(DependencyHandler dependencyHandler) {
+
+}
+//:common
+static def zqscommonDependencies(DependencyHandler dependencyHandler) {
+
+}
+
+
+ext.allModuleDependencies = this.&allModuleDependencies
+ext.zqscommonDependencies = this.&zqscommonDependencies
+ext.appDependencies = this.&appDependencies
+
+ext{
+    //编译函数
+    allModuleDependencies=this.&allModuleDependencies
+    zqscommonDependencies = this.&zqscommonDependencies
+    appDependencies = this.&appDependencies
+}
