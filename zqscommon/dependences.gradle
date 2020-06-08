@@ -94,8 +94,23 @@ static def allModuleDependencies(DependencyHandler dependencyHandler, String mod
     dependencyHandler.api "androidx.lifecycle:lifecycle-common-java8:2.0.0"
     dependencyHandler.kapt  "androidx.lifecycle:lifecycle-compiler:2.0.0"
 
+    //https://github.com/zhpanvip/BannerViewPager/blob/master/README_CN.md
+    dependencyHandler.api('com.github.zhpanvip:BannerViewPager:3.1.2'){
+        exclude group: 'androidx.viewpager2'
+    }
+
     //kotlin协程
     dependencyHandler.api "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.3"
+
+    //google自带弹性布局
+    dependencyHandler.api 'com.google.android:flexbox:2.0.1'
+
+
+    dependencyHandler.api 'androidx.lifecycle:lifecycle-extensions:2.2.0'
+    dependencyHandler.api 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0'
+
+    //kotlin编译databinding
+    dependencyHandler.kapt "com.android.databinding:compiler:3.6.3"
 
     switch (moduleName) {
         case "zqscommon":

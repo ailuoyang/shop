@@ -18,9 +18,10 @@ open abstract class DataBindingActivity<DB : ViewDataBinding?> : BaseActivity() 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        mDataing?.let {
+        if (mDataing == null) {
             mDataing = DataBindingUtil.inflate<DB>(layoutInflater, getAnnoLayoutId(), null, false)
         }
+        setContentView(getDB()?.getRoot())
     }
 
     fun getAnnoLayoutId(): Int {
@@ -32,9 +33,9 @@ open abstract class DataBindingActivity<DB : ViewDataBinding?> : BaseActivity() 
             }
         }
         LogUtils.v("获得fragment布局注解失败,使用getLayoutId获得")
-        throw IllegalArgumentException("请使用FragmentLayoutId注解" + this.javaClass.name)
+        throw IllegalArgumentException("请使用LayoutId注解" + this.javaClass.name)
     }
 
-    fun getDB() = mDataing
+    fun getDB() = mDataing!!
 
 }

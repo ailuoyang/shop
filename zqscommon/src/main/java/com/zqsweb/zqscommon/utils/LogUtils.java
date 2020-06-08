@@ -1,8 +1,7 @@
 package com.zqsweb.zqscommon.utils;
 
+import android.app.Application;
 import android.util.Log;
-
-import com.zqsweb.zqscommon.app.ZqsApp;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -21,7 +20,7 @@ public class LogUtils {
 
     private final static String APP_TAG = "mTest";
 
-    private final static String LOG_FILE_PATH = ZqsApp.getApp().getExternalCacheDir().getAbsolutePath()+File.separator+"log__"+File.separator;
+    private static String LOG_FILE_PATH ;
 
     public static void writeLogToFile(String text){
         writeLogToFile("default_log_name", text);
@@ -29,6 +28,10 @@ public class LogUtils {
 
     public static String getWriteLogPath(String fileName) {
         return LOG_FILE_PATH + fileName;
+    }
+
+    public static void init(Application application) {
+        LOG_FILE_PATH = application.getExternalCacheDir().getAbsolutePath() + File.separator + "log__" + File.separator;
     }
 
     /**

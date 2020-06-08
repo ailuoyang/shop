@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+        <variable
+            name="model"
+            type="com.ledao.shop.one.index.IndexFragment.ShopBean" />
+    </data>
+    <com.google.android.flexbox.FlexboxLayout
+        android:orientation="vertical"
+        android:layout_width="158dp"
+        android:layout_height="wrap_content"
+        android:elevation="1dp"
+        app:bl_corners_radius="10dp"
+        app:bl_solid_color="#fff"
+        app:flexWrap="wrap"
+        android:layout_marginBottom="15dp"
+        >
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:src="@drawable/bg_test_color"
+            android:scaleType="centerCrop"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="蛋蛋肖前拉链方头真皮"
+            android:textColor="#ff111111"
+            android:textSize="13dp"
+            android:maxLines="1"
+            android:singleLine="true"
+            android:lines="1"
+            android:ellipsize="end"
+            android:layout_marginTop="17dp"
+            android:layout_marginLeft="5.5dp"
+            android:layout_marginRight="5.5dp"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="蛋蛋肖前拉链方头真皮显瘦弹力过膝靴"
+            android:textColor="#ff999999"
+            android:textSize="10dp"
+            android:maxLines="2"
+            android:ellipsize="end"
+            android:layout_marginTop="9.5dp"
+            android:layout_marginLeft="5.5dp"
+            android:layout_marginRight="5.5dp"
+            />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="20dp"
+            android:paddingLeft="6dp"
+            android:paddingRight="6dp"
+            android:layout_marginBottom="14dp"
+            android:gravity="center_vertical"
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="¥520"
+                android:textColor="#ffff0000"
+                android:textSize="15dp"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="4545人付款"
+                android:textColor="#ff999999"
+                android:textSize="10dp"
+                android:layout_marginLeft="10dp"
+                />
+
+        </LinearLayout>
+
+    </com.google.android.flexbox.FlexboxLayout>
+
+    <!--<LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        >
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="155dp"
+            android:layout_height="wrap_content"
+            android:elevation="1dp"
+            app:bl_corners_radius="10dp"
+            app:bl_solid_color="#fff"
+            android:layout_marginLeft="16.5dp"
+            >
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:src="@drawable/bg_test_color"
+                android:scaleType="centerCrop"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="蛋蛋肖前拉链方头真皮"
+                android:textColor="#ff111111"
+                android:textSize="13dp"
+                android:maxLines="1"
+                android:singleLine="true"
+                android:lines="1"
+                android:ellipsize="end"
+                android:layout_marginTop="17dp"
+                android:layout_marginLeft="5.5dp"
+                android:layout_marginRight="5.5dp"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="蛋蛋肖前拉链方头真皮显瘦弹力过膝靴"
+                android:textColor="#ff999999"
+                android:textSize="10dp"
+                android:maxLines="2"
+                android:ellipsize="end"
+                android:layout_marginTop="9.5dp"
+                android:layout_marginLeft="5.5dp"
+                android:layout_marginRight="5.5dp"
+                />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="20dp"
+                android:paddingLeft="6dp"
+                android:paddingRight="6dp"
+                android:layout_marginBottom="14dp"
+                android:gravity="center_vertical"
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="¥520"
+                    android:textColor="#ffff0000"
+                    android:textSize="15dp"
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="4545人付款"
+                    android:textColor="#ff999999"
+                    android:textSize="10dp"
+                    android:layout_marginLeft="10dp"
+                    />
+
+            </LinearLayout>
+
+        </LinearLayout>
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="155dp"
+            android:layout_height="wrap_content"
+            android:elevation="1dp"
+            app:bl_corners_radius="10dp"
+            app:bl_solid_color="#fff"
+            android:layout_marginLeft="16.5dp"
+            >
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:src="@drawable/bg_test_color"
+                android:scaleType="centerCrop"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="蛋蛋肖前拉链方头真皮"
+                android:textColor="#ff111111"
+                android:textSize="13dp"
+                android:maxLines="1"
+                android:singleLine="true"
+                android:lines="1"
+                android:ellipsize="end"
+                android:layout_marginTop="17dp"
+                android:layout_marginLeft="5.5dp"
+                android:layout_marginRight="5.5dp"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="蛋蛋肖前拉链方头真皮显瘦弹力过膝靴"
+                android:textColor="#ff999999"
+                android:textSize="10dp"
+                android:maxLines="2"
+                android:ellipsize="end"
+                android:layout_marginTop="9.5dp"
+                android:layout_marginLeft="5.5dp"
+                android:layout_marginRight="5.5dp"
+                />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="20dp"
+                android:paddingLeft="6dp"
+                android:paddingRight="6dp"
+                android:layout_marginBottom="14dp"
+                android:gravity="center_vertical"
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="¥520"
+                    android:textColor="#ffff0000"
+                    android:textSize="15dp"
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="4545人付款"
+                    android:textColor="#ff999999"
+                    android:textSize="10dp"
+                    android:layout_marginLeft="10dp"
+                    />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>-->
+</layout>

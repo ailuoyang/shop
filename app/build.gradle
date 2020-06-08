@@ -31,11 +31,17 @@ android {
         sourceCompatibility = 1.8
         targetCompatibility = 1.8
     }
+    dataBinding {
+        enabled = true
+
+    }
+
+    android{compileOptions.encoding="UTF-8"}
 
 }
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    rootProject.allModuleDependencies(dependencies,"app")
+    rootProject.allModuleDependencies(dependencies, "app")
     api project(':ledaocommon')
 }

@@ -32,6 +32,7 @@ class ZqsApp : Application() {
         initToast()
         initRxHttp()
         initForegroundCallbackListener()
+        LogUtils.init(this)
     }
 
     //初始化路由
