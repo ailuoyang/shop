@@ -39,8 +39,5 @@ public abstract class DataBindingFragment<DB extends ViewDataBinding> extends Ba
         view.setOnClickListener(v -> getActivity().finish());
     }
 
-    @Override
-    public void initImmersionBar() {
 
-    }
 }

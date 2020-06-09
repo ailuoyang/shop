@@ -1,10 +1,10 @@
 package com.ledao.shop.one.index
 
 import android.view.View
-import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import androidx.viewpager2.widget.ViewPager2
-import com.google.android.flexbox.*
+import com.gyf.immersionbar.ImmersionBar
 import com.ledao.shop.R
 import com.ledao.shop.databinding.AdapterItemIndexShopFlowBinding
 import com.ledao.shop.databinding.IndexIndexFragmentBinding
@@ -14,9 +14,7 @@ import com.zqsweb.zqscommon.anno.LayoutId
 import com.zqsweb.zqscommon.base.DataBindingFragment
 import com.zqsweb.zqscommon.base.ZqsDBAdapter
 import com.zqsweb.zqscommon.base.ZqsDBViewHolder
-import com.zqsweb.zqscommon.utils.AppUtils
-import com.zqsweb.zqscommon.utils.GlideApp
-import com.zqsweb.zqscommon.utils.LogUtils
+import com.zqsweb.zqscommon.utils.*
 
 
 /**
@@ -34,7 +32,7 @@ class IndexFragment : DataBindingFragment<IndexIndexFragmentBinding>() {
     override fun onFirstLoad() {
         super.onFirstLoad()
         db.indexBannerVp.apply {
-            var bannerBeans:MutableList<BannerBean> = mutableListOf()
+            var bannerBeans: MutableList<BannerBean> = mutableListOf()
             bannerBeans.add(BannerBean())
             bannerBeans.add(BannerBean())
             bannerBeans.add(BannerBean())
@@ -54,80 +52,104 @@ class IndexFragment : DataBindingFragment<IndexIndexFragmentBinding>() {
             create(bannerBeans)
         }
         db.indexList.apply {
-            var stagger= FlexboxLayoutManager(context)
-            //stagger.alignContent=AlignContent.SPACE_AROUND
-            stagger.alignItems=AlignItems.BASELINE
-            stagger.flexDirection=FlexDirection.ROW
-            stagger.flexWrap=FlexWrap.WRAP
-            stagger.justifyContent=JustifyContent.SPACE_AROUND
-            layoutManager=stagger
-            var shops= mutableListOf<ShopBean>()
-            for (item in 1..100) {
-                var shop= ShopBean()
+            var stagger = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
+            stagger.gapStrategy = StaggeredGridLayoutManager.GAP_HANDLING_NONE
+            layoutManager = stagger
+            var shops = mutableListOf<ShopBean>()
+            for (item in 1..50) {
+                var shop = ShopBean()
+                shop.title = "标题$item"
+                shop.content = "内容$item"
+                var ran: Int = RandomUtils.randomInt(1, 20)
+                repeat(ran) {
+                    shop.content += "内容"
+                }
+                shop.imageUrl = AppUtils.getRandomCartoonImage()
+                shop.payNum = 2349
+                shop.price = 520f
                 shops.add(shop)
             }
-            var shopAdapter=ShopAdapter()
+            var shopAdapter = ShopAdapter()
+            shopAdapter.setHasStableIds(true)
             shopAdapter.setNewInstance(shops)
-            adapter=shopAdapter
+            setItemViewCacheSize(100)
+            adapter = shopAdapter
         }
-        db.holder=Holder()
-        db.model=Model()
+        db.indexFlush.apply {
+            setOnRefreshListener{
+                TUtils.show("上啦刷新")
+                finishRefresh(1500)
+            }
+
+            setOnLoadMoreListener {
+                TUtils.show("下啦刷新")
+                finishLoadMore(1500)
+            }
+        }
+        db.holder = Holder()
+        db.model = Model()
 
     }
 
     inner class Holder {
 
+        fun clickSearch() {
+            TUtils.show("搜索")
+        }
+
         /*
         * 消息
         * */
         fun clickMessage() {
-
+            TUtils.show("消息")
         }
 
         /*
         * 免费领
         * */
         fun click1() {
-
+            TUtils.show("免费领")
         }
 
         /*
         * 领券
         * */
         fun click2() {
-
+            TUtils.show("领券")
         }
 
         /*
         * 团购
         * */
         fun click3() {
-
+            TUtils.show("团购")
         }
 
         /*
         * 精选
         * */
         fun click4() {
-
+            TUtils.show("精选")
         }
 
         /*
         * 爆款
         * */
         fun click5() {
-
+            TUtils.show("爆款")
         }
     }
 
-    inner class Model {
-
+    class Model {
+        var imageUrl1=AppUtils.getRandomImage()
+        var imageUrl2=AppUtils.getRandomImage()
     }
 
     /*
     * banner适配器
     * */
-    inner class BannerAdapter(layoutId: Int) :BaseBannerAdapter<BannerBean, BannerAdapter.BannerViewHolder>() {
+    class BannerAdapter(layoutId: Int) :
+        BaseBannerAdapter<BannerBean, BannerAdapter.BannerViewHolder>() {
 
         var mLayoutId: Int = layoutId
 
@@ -145,9 +167,8 @@ class IndexFragment : DataBindingFragment<IndexIndexFragmentBinding>() {
             position: Int,
             pageSize: Int
         ) {
-            holder?.bindData(data!!,position,pageSize)
+            holder?.bindData(data!!, position, pageSize)
         }
-
 
         inner class BannerViewHolder(itemView: View) : BaseViewHolder<BannerBean>(itemView) {
             override fun bindData(data: BannerBean, position: Int, pageSize: Int) {
@@ -159,32 +180,36 @@ class IndexFragment : DataBindingFragment<IndexIndexFragmentBinding>() {
     /*
     * 商品列表适配器
     * */
-    inner class ShopAdapter: ZqsDBAdapter<ShopBean, AdapterItemIndexShopFlowBinding>(R.layout.adapter_item_index_shop_flow) {
+    class ShopAdapter :
+        ZqsDBAdapter<ShopBean, AdapterItemIndexShopFlowBinding>(R.layout.adapter_item_index_shop_flow) {
+
         override fun convert(
             holder: ZqsDBViewHolder<AdapterItemIndexShopFlowBinding>,
             item: ShopBean
         ) {
             super.convert(holder, item)
-            var params: ViewGroup.LayoutParams = holder.itemView.getLayoutParams()
-            if (params is FlexboxLayoutManager.LayoutParams) {
-               //params.flexGrow=1f
-                //params.flexBasisPercent=0.45f
-               // if (getItemPosition(item) % 2 == 0) params.marginLeft=DisplayUtils.dip2px(context,15f).toInt()
+            holder.dataBinding?.model = item
+            holder.dataBinding?.root?.setOnClickListener {
+                TUtils.show("点击商品列表:" + getItemPosition(item))
             }
-
         }
     }
 
-    class ShopBean{
-        var title:String?="标题"
-        var content:String?="内容"
-        var imageUrl:String?=AppUtils.getRandomImage()
-        var price:Float?=520f
-        var payNum:Long?=439
+    class ShopBean {
+        var title: String? = "标题"
+        var content: String? = "内容"
+        var imageUrl: String =
+            "https://uploadbeta.com/api/pictures/random/?key=BingEverydayWallpaperPicture"
+        var price: Float? = 520f
+        var payNum: Long? = 439
     }
 
     class BannerBean {
         var url: String = AppUtils.getRandomImage()
     }
 
+    override fun initImmersionBar() {
+        ImmersionBar.with(this).statusBarColorTransformEnable(false)
+            .keyboardEnable(false).statusBarDarkFont(true).navigationBarDarkIcon(false).init()
+    }
 }

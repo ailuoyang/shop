@@ -10,7 +10,7 @@ import com.chad.library.adapter.base.BaseQuickAdapter
  **/
 open class ZqsDBAdapter<T,DB:ViewDataBinding>(layoutId:Int): BaseQuickAdapter<T, ZqsDBViewHolder<DB>>(layoutId) {
 
-    override fun convert(holder: ZqsDBViewHolder<DB>, item: T) {
+    public override fun convert(holder: ZqsDBViewHolder<DB>, item: T) {
         holder.bind(item,getItemPosition(item))
     }
 }

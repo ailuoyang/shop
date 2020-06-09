@@ -244,7 +244,18 @@ public class AppUtils {
     }
 
     public static String getRandomImage() {
-        return "https://uploadbeta.com/api/pictures/random/?key=BingEverydayWallpaperPicture&" + UUID.randomUUID().toString();
+        return "http://api.mtyqx.cn/api/random.php?" + UUID.randomUUID().toString();
     }
 
+    public static String getRandomCartoonImage() {
+        return "http://api.mtyqx.cn/api/random.php?" + UUID.randomUUID().toString();
+    }
+
+    public static String getRandomBg() {
+        return "https://acg.xydwz.cn/gqapi/gqapi.php?" + UUID.randomUUID().toString();
+    }
+
+    public static String getRandomImageBing() {
+        return "https://uploadbeta.com/api/pictures/random/?key=BingEverydayWallpaperPicture&" + UUID.randomUUID().toString();
+    }
 }

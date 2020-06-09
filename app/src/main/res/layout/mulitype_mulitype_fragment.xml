@@ -1,16 +1,268 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-        <TextView
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:paddingTop="30dp"
+        android:background="@color/zqs_common_view_default_bg"
+        >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            >
+            <ImageView
+                android:layout_width="11dp"
+                android:layout_height="20dp"
+                android:src="@drawable/bg_test_color"
+                android:layout_marginLeft="15dp"
+                />
+
+            <LinearLayout
+                android:id="@+id/index_search"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:orientation="horizontal"
+                app:bl_corners_radius="15dp"
+                app:bl_solid_color="#EEEEEE"
+                tools:background="#EEEEEE"
+                android:layout_marginRight="15dp"
+                android:layout_marginLeft="20dp"
+                >
+
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_gravity="center_vertical"
+                    android:src="@drawable/bg_test_color"
+                    />
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="15dp"
+                    android:layout_marginLeft="11dp"
+                    android:paddingRight="15dp"
+                    android:paddingTop="0dp"
+                    android:paddingBottom="0dp"
+                    android:focusable="false"
+                    android:textSize="12dp"
+                    android:layout_gravity="center_vertical"
+                    app:bl_stroke_width="0dp"
+                    android:hint="搜索商品名称或者类型"
+                    />
+
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="分类" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            android:orientation="horizontal"
+            android:layout_marginTop="8dp"
+            >
+            <ScrollView
+                android:layout_width="64dp"
+                android:layout_height="match_parent"
+                android:overScrollMode="never"
+                android:scrollbars="none"
+                >
+                <LinearLayout
+                    android:id="@+id/mulitype_sider_bar"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    >
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:gravity="center"
+                        android:text="美妆"
+                        android:textSize="13dp"
+                        />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:gravity="center"
+                        android:text="美妆"
+                        android:background="#fff"
+                        android:textSize="13dp"
+                        />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:gravity="center"
+                        android:text="美妆"
+                        android:background="#fff"
+                        android:textSize="13dp"
+                        />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:gravity="center"
+                        android:text="美妆"
+                        android:background="#fff"
+                        android:textSize="13dp"
+                        />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:gravity="center"
+                        android:text="美妆"
+                        android:background="#fff"
+                        android:textSize="13dp"
+                        />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:gravity="center"
+                        android:text="美妆"
+                        android:background="#fff"
+                        android:textSize="13dp"
+                        />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:gravity="center"
+                        android:text="美妆"
+                        android:background="#fff"
+                        android:textSize="13dp"
+                        />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:gravity="center"
+                        android:text="美妆"
+                        android:background="#fff"
+                        android:textSize="13dp"
+                        />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:gravity="center"
+                        android:text="美妆"
+                        android:background="#fff"
+                        android:textSize="13dp"
+                        />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:gravity="center"
+                        android:text="美妆"
+                        android:background="#fff"
+                        android:textSize="13dp"
+                        />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:gravity="center"
+                        android:text="美妆"
+                        android:background="#fff"
+                        android:textSize="13dp"
+                        />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:gravity="center"
+                        android:text="美妆"
+                        android:background="#fff"
+                        android:textSize="13dp"
+                        />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:gravity="center"
+                        android:text="美妆"
+                        android:background="#fff"
+                        android:textSize="13dp"
+                        />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:gravity="center"
+                        android:text="美妆"
+                        android:background="#fff"
+                        android:textSize="13dp"
+                        />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:gravity="center"
+                        android:text="美妆"
+                        android:background="#fff"
+                        android:textSize="13dp"
+                        />
+                </LinearLayout>
+            </ScrollView>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                >
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:orientation="horizontal"
+                    android:gravity="center"
+                    >
+                    <View
+                        android:layout_width="30dp"
+                        android:layout_height="0.5dp"
+                        android:background="#ffe3e3e3"
+                        android:layout_marginRight="24dp"
+                        />
+
+                    <TextView
+                        android:id="@+id/mulitype_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="系列"
+                        android:textColor="#ff000000"
+                        android:textSize="13dp"
+                        />
+
+                    <View
+                        android:layout_width="30dp"
+                        android:layout_height="0.5dp"
+                        android:background="#ffe3e3e3"
+                        android:layout_marginLeft="24dp"
+                        />
+                </LinearLayout>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/mulitype_list"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    >
+
+                </androidx.recyclerview.widget.RecyclerView>
+
+            </LinearLayout>
+        </LinearLayout>
+
+    </LinearLayout>
 </layout>

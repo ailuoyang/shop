@@ -22,4 +22,5 @@ class CartFragment : DataBindingFragment<CartCartFragmentBinding>() {
         super.onFirstLoad()
 
     }
+
 }

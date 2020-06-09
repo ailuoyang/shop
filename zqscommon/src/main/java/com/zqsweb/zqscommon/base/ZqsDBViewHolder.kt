@@ -16,7 +16,7 @@ import com.chad.library.adapter.base.viewholder.BaseDataBindingHolder
  *   @date 2020-05-08 11:28
  *   @description
  */
-class ZqsDBViewHolder<DB : ViewDataBinding>(view: View) :BaseDataBindingHolder<DB>(view) {
+open class ZqsDBViewHolder<DB : ViewDataBinding>(view: View) :BaseDataBindingHolder<DB>(view) {
 
     fun <T> bind(t: T,position:Int) {
 
