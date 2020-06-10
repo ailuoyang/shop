@@ -3,6 +3,7 @@ package com.ledao.shop.one.my
 import androidx.lifecycle.ViewModelProvider
 import com.ledao.shop.R
 import com.ledao.shop.databinding.MyMyFragmentBinding
+import com.ledao.shop.one.index.ui.ShopListFragment
 import com.zqsweb.zqscommon.anno.LayoutId
 import com.zqsweb.zqscommon.base.DataBindingFragment
 
@@ -18,9 +19,22 @@ class MyFragment : DataBindingFragment<MyMyFragmentBinding>() {
         ViewModelProvider(this).get(MyViewModel::class.java)
     }
 
+    lateinit var mShopListFragment:ShopListFragment
 
     override fun onFirstLoad() {
         super.onFirstLoad()
+        db.myList.apply {
+            mShopListFragment= ShopListFragment()
+            childFragmentManager.beginTransaction().add(id,mShopListFragment).commit()
+        }
+    }
+
+    inner class Holder{
 
     }
+
+    class MyModel{
+
+    }
+
 }

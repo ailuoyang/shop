@@ -23,7 +23,7 @@
             <ImageView
                 android:layout_width="11dp"
                 android:layout_height="20dp"
-                android:src="@drawable/bg_test_color"
+                android:src="@mipmap/ic_return_left"
                 android:layout_marginLeft="15dp"
                 />
 

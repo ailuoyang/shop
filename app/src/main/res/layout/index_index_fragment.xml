@@ -20,6 +20,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:paddingTop="30dp"
+        app:srlEnableLoadMore="true"
+        app:srlEnableRefresh="true"
         >
         <androidx.coordinatorlayout.widget.CoordinatorLayout
             android:layout_width="match_parent"
@@ -344,25 +346,12 @@
 
 
             </com.google.android.material.appbar.AppBarLayout>
-
-            <com.scwang.smart.refresh.layout.SmartRefreshLayout
-                android:id="@+id/bottom"
+            <FrameLayout
+                android:id="@+id/index_shop_list"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:fillViewport="true"
-                android:overScrollMode="never"
-                app:srlEnablePureScrollMode="true"
                 android:background="@color/zqs_common_view_default_bg"
-                app:layout_behavior="@string/appbar_scrolling_view_behavior">
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/index_list"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:paddingLeft="10dp"
-                    android:paddingRight="10dp"
-                    />
-
-            </com.scwang.smart.refresh.layout.SmartRefreshLayout>
+                app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
 
         </androidx.coordinatorlayout.widget.CoordinatorLayout>
     </com.scwang.smart.refresh.layout.SmartRefreshLayout>

@@ -1,9 +1,19 @@
 package com.zqsweb.zqscommon.app
 
 import android.app.Application
+import android.content.Context
 import com.alibaba.android.arouter.launcher.ARouter
 import com.hjq.toast.ToastUtils
 import com.hjq.toast.style.ToastAliPayStyle
+import com.scwang.smart.refresh.footer.ClassicsFooter
+import com.scwang.smart.refresh.header.ClassicsHeader
+import com.scwang.smart.refresh.layout.SmartRefreshLayout
+import com.scwang.smart.refresh.layout.api.RefreshFooter
+import com.scwang.smart.refresh.layout.api.RefreshHeader
+import com.scwang.smart.refresh.layout.api.RefreshLayout
+import com.scwang.smart.refresh.layout.listener.DefaultRefreshFooterCreator
+import com.scwang.smart.refresh.layout.listener.DefaultRefreshHeaderCreator
+import com.zqsweb.zqscommon.R
 import com.zqsweb.zqscommon.base.BaseActivity
 import com.zqsweb.zqscommon.interceptor.ZqsInterceptor
 import com.zqsweb.zqscommon.utils.ForegroundCallbacks
@@ -25,6 +35,7 @@ import java.util.concurrent.TimeUnit
  *   @description
  */
 class ZqsApp : Application() {
+
     override fun onCreate() {
         super.onCreate()
         mApp = this
@@ -87,6 +98,39 @@ class ZqsApp : Application() {
 
 
     companion object {
+
+        init {
+            SmartRefreshLayout.setDefaultRefreshHeaderCreator(object : DefaultRefreshHeaderCreator {
+                override fun createRefreshHeader(
+                    context: Context,
+                    layout: RefreshLayout
+                ): RefreshHeader {
+                    layout.setEnableLoadMoreWhenContentNotFull(false)
+                    layout.setEnableFooterFollowWhenNoMoreData(true)
+                    layout.setPrimaryColorsId(
+                        R.color.white,
+                        R.color.zqs_flush_color
+                    ) //全局设置主题颜色
+
+                    //ClassicsHeader header=new ClassicsHeader(context);
+                    //ClassicsHeader header=new ClassicsHeader(context);
+                    return ClassicsHeader(context)
+                }
+            })
+
+            SmartRefreshLayout.setDefaultRefreshFooterCreator(object : DefaultRefreshFooterCreator {
+                override fun createRefreshFooter(
+                    context: Context,
+                    layout: RefreshLayout
+                ): RefreshFooter {
+                    //指定为经典Footer，默认是 BallPulseFooter
+                    //指定为经典Footer，默认是 BallPulseFooter
+                    layout.setPrimaryColorsId(R.color.white, R.color.zqs_flush_color)
+                    layout.setEnableFooterFollowWhenNoMoreData(false)
+                    return ClassicsFooter(context)
+                }
+            })
+        }
 
         private var mApp: ZqsApp? = null
 

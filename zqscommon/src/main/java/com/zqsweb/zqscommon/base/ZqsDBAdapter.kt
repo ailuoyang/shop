@@ -12,5 +12,7 @@ open class ZqsDBAdapter<T,DB:ViewDataBinding>(layoutId:Int): BaseQuickAdapter<T,
 
     public override fun convert(holder: ZqsDBViewHolder<DB>, item: T) {
         holder.bind(item,getItemPosition(item))
+        //用于监听recyclerview是否复用
+        //LogUtils.v("adapter_listener", "${this.javaClass.name}:${getItemPosition(item)}")
     }
 }

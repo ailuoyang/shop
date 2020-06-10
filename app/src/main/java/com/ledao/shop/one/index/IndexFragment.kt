@@ -2,19 +2,19 @@ package com.ledao.shop.one.index
 
 import android.view.View
 import androidx.lifecycle.ViewModelProvider
-import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import androidx.viewpager2.widget.ViewPager2
 import com.gyf.immersionbar.ImmersionBar
 import com.ledao.shop.R
-import com.ledao.shop.databinding.AdapterItemIndexShopFlowBinding
 import com.ledao.shop.databinding.IndexIndexFragmentBinding
+import com.ledao.shop.one.index.ui.ShopListFragment
 import com.zhpan.bannerview.BaseBannerAdapter
 import com.zhpan.bannerview.BaseViewHolder
 import com.zqsweb.zqscommon.anno.LayoutId
 import com.zqsweb.zqscommon.base.DataBindingFragment
-import com.zqsweb.zqscommon.base.ZqsDBAdapter
-import com.zqsweb.zqscommon.base.ZqsDBViewHolder
-import com.zqsweb.zqscommon.utils.*
+import com.zqsweb.zqscommon.utils.AppUtils
+import com.zqsweb.zqscommon.utils.GlideApp
+import com.zqsweb.zqscommon.utils.LogUtils
+import com.zqsweb.zqscommon.utils.TUtils
 
 
 /**
@@ -28,6 +28,8 @@ class IndexFragment : DataBindingFragment<IndexIndexFragmentBinding>() {
     val mViewModel by lazy {
         ViewModelProvider(this).get(IndexViewModel::class.java)
     }
+
+    lateinit var mShopListFragment:ShopListFragment
 
     override fun onFirstLoad() {
         super.onFirstLoad()
@@ -51,38 +53,20 @@ class IndexFragment : DataBindingFragment<IndexIndexFragmentBinding>() {
             })
             create(bannerBeans)
         }
-        db.indexList.apply {
-            var stagger = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
-            stagger.gapStrategy = StaggeredGridLayoutManager.GAP_HANDLING_NONE
-            layoutManager = stagger
-            var shops = mutableListOf<ShopBean>()
-            for (item in 1..50) {
-                var shop = ShopBean()
-                shop.title = "标题$item"
-                shop.content = "内容$item"
-                var ran: Int = RandomUtils.randomInt(1, 20)
-                repeat(ran) {
-                    shop.content += "内容"
-                }
-                shop.imageUrl = AppUtils.getRandomCartoonImage()
-                shop.payNum = 2349
-                shop.price = 520f
-                shops.add(shop)
-            }
-            var shopAdapter = ShopAdapter()
-            shopAdapter.setHasStableIds(true)
-            shopAdapter.setNewInstance(shops)
-            setItemViewCacheSize(100)
-            adapter = shopAdapter
+        db.indexShopList.apply {
+            mShopListFragment=ShopListFragment()
+            childFragmentManager.beginTransaction().add(id,mShopListFragment).commit()
         }
         db.indexFlush.apply {
             setOnRefreshListener{
-                TUtils.show("上啦刷新")
+                mShopListFragment.refresh()
+                TUtils.showLog("上啦刷新")
                 finishRefresh(1500)
             }
 
             setOnLoadMoreListener {
-                TUtils.show("下啦刷新")
+                mShopListFragment.load()
+                TUtils.showLog("下啦刷新")
                 finishLoadMore(1500)
             }
         }
@@ -177,32 +161,6 @@ class IndexFragment : DataBindingFragment<IndexIndexFragmentBinding>() {
         }
     }
 
-    /*
-    * 商品列表适配器
-    * */
-    class ShopAdapter :
-        ZqsDBAdapter<ShopBean, AdapterItemIndexShopFlowBinding>(R.layout.adapter_item_index_shop_flow) {
-
-        override fun convert(
-            holder: ZqsDBViewHolder<AdapterItemIndexShopFlowBinding>,
-            item: ShopBean
-        ) {
-            super.convert(holder, item)
-            holder.dataBinding?.model = item
-            holder.dataBinding?.root?.setOnClickListener {
-                TUtils.show("点击商品列表:" + getItemPosition(item))
-            }
-        }
-    }
-
-    class ShopBean {
-        var title: String? = "标题"
-        var content: String? = "内容"
-        var imageUrl: String =
-            "https://uploadbeta.com/api/pictures/random/?key=BingEverydayWallpaperPicture"
-        var price: Float? = 520f
-        var payNum: Long? = 439
-    }
 
     class BannerBean {
         var url: String = AppUtils.getRandomImage()

@@ -2,6 +2,7 @@
 <resources>
     <!--view的默认背景色-->
     <color name="zqs_common_view_default_bg">#F6F6F6</color>
+    <color name="zqs_flush_color">#7b7b7b</color>
     <color name="colorPrimary">#8D8C8E</color>
     <color name="colorPrimaryDark">#8D8C8E</color>
     <color name="colorAccent">#000000</color>

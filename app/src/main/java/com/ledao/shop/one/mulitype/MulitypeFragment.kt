@@ -29,8 +29,10 @@ class MulitypeFragment : DataBindingFragment<MulitypeMulitypeFragmentBinding>() 
     var mAdapter:MuliTypeAdapter=MuliTypeAdapter(R.layout.adapter_item_mulitype_types)
     //当前选中的边
     var mCurrentSelect=0
+
     override fun onFirstLoad() {
         super.onFirstLoad()
+
         db.mulitypeList.apply {
             //var flex=FlexboxLayoutManager(context)
             var flex=GridLayoutManager(context,3)
@@ -64,7 +66,6 @@ class MulitypeFragment : DataBindingFragment<MulitypeMulitypeFragmentBinding>() 
                     }
                     mAdapter.setNewInstance(types)
 
-
                     it as TextView
                     db.mulitypeTitle.text=it.text
                 }
@@ -83,6 +84,7 @@ class MulitypeFragment : DataBindingFragment<MulitypeMulitypeFragmentBinding>() 
             holder.dataBinding?.model=item
         }
     }
+
 
     class MuliTypeModel{
         var imageUrl:String?=""

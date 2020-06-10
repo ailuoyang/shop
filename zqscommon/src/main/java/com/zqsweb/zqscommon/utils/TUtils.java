@@ -15,7 +15,7 @@ public class TUtils {
 
     public static void showLog(String msg) {
         if (LogUtils.isDebug) {
-            //ToastUtils.show(msg);
+            ToastUtils.show(msg);
         }
     }
 
